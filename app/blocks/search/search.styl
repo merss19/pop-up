@@ -1,0 +1,60 @@
+#drop-search
+	transition: all 0.4s
+.search
+	padding: 12px 28px 21px 28px;
+
+	&__head
+		font-size: 30px
+
+	&__desc
+		color: #666666
+		margin-top: 7px;
+		font-size: 14px;
+		line-height: 18px;
+
+	&__input
+		width: 100%
+		border:  1px solid #8f8f8f
+		padding: 13px;
+		margin-top: 13px;
+		padding-left: 47px;
+
+		&-wrapper
+			position: relative
+			&:before
+				content: ''
+				sprite $search2
+				position: absolute
+				display: block
+				top:26px
+				left:15px
+
+	&__list
+		margin-top: 10px
+
+.results
+	&__item
+		float: left
+		width:151px
+		padding-bottom: 13px;
+		border:  1px solid #fff
+		cursor: pointer
+
+		&:hover
+			border:  1px solid #ddd
+
+	&__img
+		display: block
+		margin: 20px auto 0
+		width: 79px
+	&__name
+		font-size: 12px
+		padding: 14px 14px 0 14px
+		display: block
+		line-height: 16px;
+
+	&__code
+		font-size: 12px
+		display: block
+		color: #b0b0b0
+		padding: 2px 14px 0 14px

@@ -1,0 +1,6 @@
+mixin view-all(number, name)
+	+b.view-all
+		+e('a').link View All
+			+e('span').value=number
+			=name
+			+b('i').fa.fa-arrow-right

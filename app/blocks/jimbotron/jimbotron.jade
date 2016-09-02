@@ -1,0 +1,25 @@
+mixin jimbotron()
+	+b.jimbotron-wrapper
+		+b.jimbotron
+			+e('h1').header Ethereum Jobs
+			+e.item
+				+e('button').btn.fa.fa-twitter.btn-vidget__
+					+e('a').link Follow @ethercasts
+			+e.item
+				+e('p').desc The premier job board and developer community space specifically for
+					+e('a').desc-link Ethereum
+					| by
+					+e('a').desc-link EtherCasts
+					|.
+				+e('p').desc Browse the
+					+e('a').desc-link 25 active job postings
+					|or
+					+e('a').desc-link create your profile
+					|join the
+					+e('a').desc-link registered developers
+					|.
+			+e.btns-action.clearfix
+				+b.btn-main.clearfix.col-sm-6.col-xs-12
+					+e('a').link.btn-post Post A Job
+				+b.btn-main.clearfix.col-sm-6.col-xs-12
+					+e('a').link.btn-create Create a Profile

@@ -1,0 +1,21 @@
+mixin catalog(cat)
+	//каталог
+	+b.cat-wrap
+		+b.catalog&attributes(attributes)
+			+e.btn Каталог
+				+e('span').circle
+			+e.outer
+				+e('ul').list
+					each item in cat
+						+e('li').item.clearfix
+							+e('a').link=item[0]
+								+e.next
+							+e('ul').drop-list
+								+e('li').drop-item.clearfi
+									+e('a').drop-link=item[0]
+								+e('li').drop-item.clearfi
+									+e('a').drop-link Мольберты
+								+e('li').drop-item.clearfi
+									+e('a').drop-link Наборы для лепки
+								+e('li').drop-item.clearfi
+									+e('a').drop-link Мольберты

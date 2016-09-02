@@ -1,0 +1,14 @@
+include ../developer/developer
+include ../view-all/view-all
+include ../header-section/header-section
+
+mixin developers(developers)
+	+b.developers
+		+e.header-section
+			+header-section('Featured Developers','')
+		+e('ul').list.clearfix
+			each developer in developers
+				+b('li').developers__item.col-md-3
+					+developer(developer)
+		+e.view-all
+			+view-all(80,' Developers')

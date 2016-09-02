@@ -1,0 +1,275 @@
+.catalog
+	position: fixed;
+	top: 108px;
+	z-index: 999;
+
+	&__btn
+		position: fixed;
+		top: 300px;
+		background: colorMark
+		color: #fff;
+		padding: 12px 12px;
+		text-transform: uppercase;
+		cursor: pointer;
+		font-size: 17px;
+		left: -44px;
+		font-family:HNBold
+		transform rotate(-90deg)
+		transition: all 0.4s;
+		z-index: 99;
+
+		&:after
+			content: ''
+			display: block
+			sprite $catalog
+			position: absolute
+			right: 22px;
+			top: 19px;
+			transform: rotate(90deg);
+
+	&__circle
+		background: #df6c15
+		width:25px
+		height:25px
+		display: block;
+		border-radius: 12px;
+		float: right;
+		margin-left: 7px;
+
+
+	&__list
+		transition: all 0.4s
+		padding: 2px 0 16px 0;
+		position: absolute
+		top:0
+		left: -280px;
+		z-index:999
+		overflow: hidden
+
+		.mCSB_draggerContainer
+			display: none
+
+	&__img
+		padding-left: 11px;
+
+	&__item
+		padding: 6.4px 17px;
+		width:280px
+		cursor: pointer
+		background: #f9f9f9
+
+		&:last-child
+			padding-bottom:24px
+
+		&:hover
+			.catalog__next
+				sprite $rigth2
+			& > .catalog__drop-list
+				display: block
+			&:before
+				sprite $smiling2
+
+		&:before
+			content: ''
+			float: left
+			top: 10px;
+			sprite $smiling
+
+		&:nth-child(2)
+			&:before
+				sprite $car
+
+			&:hover
+				&:before
+					sprite $car2
+
+		&:nth-child(3)
+			&:before
+				sprite $key
+
+			&:hover
+				&:before
+					sprite $key2
+
+		&:nth-child(4)
+			&:before
+				sprite $tricycle
+
+			&:hover
+				&:before
+					sprite $tricycle2
+
+		&:nth-child(5)
+			&:before
+				sprite $pencil
+
+			&:hover
+				&:before
+					sprite $pencil2
+
+		&:nth-child(6)
+			&:before
+				sprite $train
+
+			&:hover
+				&:before
+					sprite $train2
+
+		&:nth-child(7)
+			&:before
+				sprite $cube
+
+			&:hover
+				&:before
+					sprite $cube2
+
+		&:nth-child(8)
+			&:before
+				sprite $rocket
+
+			&:hover
+				&:before
+					sprite $rocket2
+
+		&:nth-child(9)
+			&:before
+				sprite $lego
+
+			&:hover
+				&:before
+					sprite $lego2
+
+		&:nth-child(10)
+			&:before
+				sprite $doll
+
+			&:hover
+				&:before
+					sprite $doll2
+
+		&:nth-child(11)
+			&:before
+				sprite $car
+
+			&:hover
+				&:before
+					sprite $car2
+
+		&:nth-child(12)
+			&:before
+				sprite $bear
+
+			&:hover
+				&:before
+					sprite $bear2
+
+		&:nth-child(13)
+			&:before
+				sprite $ball
+
+			&:hover
+				&:before
+					sprite $ball2
+
+		&:nth-child(14)
+			&:before
+				sprite $puzzle
+
+			&:hover
+				&:before
+					sprite $puzzle2
+
+		&:nth-child(15)
+			&:before
+				sprite $santa
+			&:hover
+				&:before
+					sprite $santa2
+
+	&__link
+		padding: 1.6px 0
+		display: inline-block
+		padding-left: 17px;
+		font-size:13px
+		width: 89%;
+
+		&:hover
+			color: colorMark
+
+	&__name
+		padding-left: 41px;
+		font-size: 13px;
+
+	&__next
+		sprite $rigth
+		float: right
+		position: relative;
+		top: 6px;
+		right: 4px;
+
+	&__drop-list
+		position: absolute;
+		left: 280px;
+		width: 280px
+		top: 0
+		height: 558px
+		background: #fff
+		display: none
+		z-index: 2;
+		padding: 5.5px 25px;
+		border-right: 2px solid colorMark;
+
+	&__drop-link
+		padding-left:50px;
+		display: block
+		
+		&:hover
+			color: colorMark
+
+
+	&__drop-item
+		padding: 7px 0
+
+		&:hover
+			&:before
+				sprite $toys2
+
+		&:before
+			content: ''
+			float: left
+			top: 10px;
+			sprite $toys
+
+		&:nth-child(2)
+			&:before
+				sprite $easel
+
+			&:hover
+				&:before
+					sprite $easel2
+
+		&:nth-child(3)
+			&:before
+				sprite $watercolor
+
+			&:hover
+				&:before
+					sprite $watercolor2
+
+		&:nth-child(4)
+			&:before
+				sprite $sand
+
+			&:hover
+				&:before
+					sprite $sand2
+
+.active
+	.catalog__btn
+		left:235px
+
+		&:after
+			transform: rotate(180deg);
+
+	.catalog__list
+		left: 0

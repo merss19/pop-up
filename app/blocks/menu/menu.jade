@@ -1,0 +1,10 @@
+mixin menu()
+	-var menu = ['О компании','Sale','Покупателям','Вопросы и ответы','Новости','Вакансии','Контакты']
+	//топ меню
+	+b.header__menu
+		+b.inner
+			+b('nav').main-menu
+				+e('ul').list.clearfix
+					each item in menu
+						+e('li').item
+							+e('a').link=item

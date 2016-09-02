@@ -1,0 +1,7 @@
+mixin header-section(header, desc)
+	+b.header-section.clearfix
+		+b.header-name.col-sm-4.col-xs-12=header
+		+e.desc.col-sm-4.col-xs-12=desc
+		+e.rss.col-sm-4.col-xs-12
+			+e.rss-icon
+				+b('i').fa.fa-rss

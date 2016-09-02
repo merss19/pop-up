@@ -1,0 +1,25 @@
+include ../search/search
+include ../cart/cart
+mixin top()
+	//шапка
+	+b.header__top
+		+b.inner
+			+b.top
+				+e.wrapper
+					+e.logo
+						+e('a').logo-link(href = "index.html")
+					+e.phones
+						+e.phones-group
+							+e.phones-item +7 495 645 10 49
+							+e.phones-item +7 495 645 10 49
+					+e.login
+						+e('a').login-link Войти
+					+e.cart.top-dropdown
+						+e('a').cart-link Корзина
+							+e('span').cart-notice 2
+							//корзина
+						+cart()
+					+e.search.top-dropdown
+						+e.search-img
+						//поиск
+						+search()

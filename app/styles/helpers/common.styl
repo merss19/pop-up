@@ -1,0 +1,166 @@
+::selection
+	background: #ddd
+
+.clearfix:before,
+.clearfix:after
+	display table
+	clear both
+	content ''
+
+*,
+*:before,
+*:after
+	box-sizing: border-box;
+
+h1,h2,h3,h4,p
+	margin 0
+
+a
+	color: #222
+	text-decoration: none
+
+	&:hover
+		text-decoration: none
+		color: #222
+img
+	max-width: 100%;
+	height: auto;
+
+.inner
+	inner()
+
+.btn-main
+	width: 127px
+	padding: 7px
+	border: 2px solid #f68026;
+	color: #fff
+	font-size: 16px
+	background: colorMark
+	text-transform: uppercase
+	margin: auto;
+	cursor: pointer
+
+	&:hover
+		color: colorMark
+		background: transparent
+
+.btn-add
+	background: #8ec63f;
+	color: #fff;
+	border: none
+	font-size: 17px;
+	padding: 10px 35px;
+	text-transform: uppercase
+
+	
+.link-main
+	color: colorMain
+	cursor: pointer
+
+	&:hover
+		text-decoration: underline
+	
+.hide
+	display: none
+	transition: all 0.4s
+.show
+	display: block
+	transition: all 0.4s
+
+.menu-drop
+	position: absolute;
+	z-index: 2;
+	border 2px solid colorMark
+	box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+	background: #fff;
+	max-width: 1000px;
+	min-width: 1000px;
+	display: none
+	top: 69px;
+	right: 1px
+	cursor: default;
+
+
+	&__bottom
+		background: #f4f4f4
+		padding-top: 9px;
+		height:52px
+
+	&__close
+		text-transform: uppercase;
+		padding: 12px;
+		text-align: right;
+		font-size: 12px;
+		padding-right: 20px;
+		float: right;
+		cursor: pointer
+
+	&__print
+		float: left;
+		width: auto;
+		padding: 8px 34px;
+
+		&-link
+			float: left;
+			padding: 0 20px;
+			color: colorMain
+			text-decoration: underline
+			font-size:13px
+			cursor: pointer
+
+			&:hover
+				text-decoration: none
+
+		&:before
+			content: ''
+			float: left;
+			sprite $printer
+			cursor: pointer
+
+.active
+	.menu-drop
+		display: block
+
+.btn-close
+	sprite $btn
+	display: block
+	cursor: pointer
+
+.top-dropdown
+	&.active
+		background: colorMark
+
+
+.top__search
+	&.active
+		border-right: 1px solid colorMark
+
+.top-fix
+	position: fixed;
+	z-index: 999;
+
+.table
+	display: table
+	border-collapse: collapse;
+
+.table-row
+	display: table-row
+
+.table-cell
+	display: table-cell
+
+.icon-edit
+	&:before
+		content: ''
+		background: url("../img/edit.png");
+		display: block
+		width: 16px;
+		height: 16px;
+
+.icon-delete
+	&:before
+		content: ''
+		background: url("../img/delete.png");
+		display: block
+		width: 16px;
+		height: 16px;

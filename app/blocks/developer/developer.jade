@@ -1,0 +1,10 @@
+mixin developer(developer)
+	+b.developer&attributes(attributes)
+		+e.photo
+			+e('img').photo-img(src = "assets/img/dev-ava.png" width="100px" height = "100px")
+		+e.name
+			+e('a').name-link(href = "developer.html")=developer.name
+		+b('span').label-hire.fa.fa-rocket Hire Me
+		+e.job=developer.job
+		+e.location
+			+b('i').fa.fa-map-marker=developer.location

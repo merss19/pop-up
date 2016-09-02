@@ -1,0 +1,14 @@
+include ../job/job
+include ../view-all/view-all
+include ../header-section/header-section
+
+mixin recent-jobs(jobs)
+	+b.recent-jobs
+		+e.header-section
+			+header-section('Recent Jobs','Last post about a day ago')
+		+e('ul').list
+			each job in jobs
+				+b('li').recent-jobs__item
+					+job(job)
+		+e.view-all
+			+view-all(25,' Jobs')

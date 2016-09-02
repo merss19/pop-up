@@ -1,0 +1,36 @@
+mixin tpl-rule()
+	+b('template')#tpl-rule
+		+b.action-rule.clearfix(id="-id_rule-",data-id_r="-id_r-")
+			+e.item
+				+e.trigger(data-toggle="collapse", data-target='#'+"-collapse-")
+				+e('label').label Условие:
+				+e('input').input_type_from(type="text", value="3")
+			+e.item
+				+e('label').label Балл:
+				+e('input').input_type_upto(type="text", value="5")
+			+e.close Удалить правило
+			+e.collapse.collapse(id="-collapse-")
+				+e.inner
+					+b.add-action__
+						+e('select').select.select-action
+							+b('option')(value="select" selected) Добавить развивающее действие
+							+b('option')(data-id="1") действие 1
+							+b('option')(data-id_c="2") действие 2
+							+b('option')(data-id="3") действие 3
+					+b.action-list
+						+e.item
+							+b.action-table.table
+			+e.no-action нет действий
+					//+b.action-desc(data-ipr_setting_id="-ipr_setting_id-")
+						+e.arrow
+						+e.inner
+							+e.box
+								+e('h3').header Описание специального развивающего действия
+								+e('textarea').text
+								+e.notice Осталось
+									+e('span') 150
+									| символов
+							+e.list
+						+e.bottom
+							+e.add.btn.btn-primary(type="button") Добавить
+							+e.cancel.btn.btn-primary(type="button") Отмена

@@ -1,0 +1,34 @@
+mixin developer-cart()
+	+b.developer-cart-wrapper&attributes(attributes)
+		+b.developer-cart.clearfix
+			+e.side.col-sm-3.cart__
+				+e.photo
+					+e('img')(src = "assets/img/dev-ava.png" width="200px" height = "200px")
+				+e.label
+					+b.label-hire.fa.fa-rocket Hire me
+				+e.info.info__
+					+e.item
+						+e.item-location
+							+b('i').fa.fa-map-marker Sevilla/Spain
+					+e.item
+						+e('ul').item-iterested
+							+e.item-head Interested In
+							+e('li').item-text Hourly Contract
+							+e('li').item-text Open Source
+							+e('li').item-text Hourly Contract
+					+e.item.cart-links__
+						+e.item
+							+b('i').fa.fa-github
+							+e('a').link Github
+						+e.item
+							+b('i').fa.fa-linkedin
+							+e('a').link Linkedin
+					+e.item
+						+e.item-date
+							+b('i').fa.fa-calendar Created on March 23rd 2016
+			+e.main.col-sm-9.cart-content__
+				+e.header
+					+e.name.header-name Carmelo
+					+e.desc DevOps
+				+e.content
+					+e.text Lover of the challenges, ruby and JS. Syadmin/DevOps for over 13 years.

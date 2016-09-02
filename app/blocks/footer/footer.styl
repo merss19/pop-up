@@ -1,0 +1,62 @@
+.footer
+	padding-bottom:20px
+
+.list-link
+	font-size:13px
+	padding:20px 0 20px 8px
+
+	&__list
+		float: left
+		width:17%
+
+		&:nth-child(2)
+			width:22.7%
+
+		&:nth-child(3)
+			width:21.4%
+
+		&:nth-child(4)
+			width:19.8%
+
+
+	&__item
+		padding: 3px 0;
+		
+	&__link
+		cursor: pointer
+		&:hover
+			color: colorMark
+
+.footer-bottom
+	padding: 9px;
+	&__brend
+		font-size: 18px
+		font-family: HNBold
+		float: left
+		width:192px
+		margin-top:3px
+
+	&__address
+		float: left
+		padding: 5px;
+		width:240px
+
+		&:before
+			content: ''
+			sprite $map
+			margin-right: 16px;
+			display: inline-block;
+			position: relative;
+			top: 4px;
+
+	&__phone
+		float: left
+		padding:5px 0
+
+		&:before
+			content: ''
+			sprite $tel
+			display: inline-block
+			position: relative
+			top: 4px
+			margin-right: 16px

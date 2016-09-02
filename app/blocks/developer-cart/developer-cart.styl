@@ -1,0 +1,52 @@
+.developer-cart-wrapper
+	inner()
+	min-height: 800px;
+
+.developer-cart
+	padding: 15px;
+	margin-top: 24px;
+	border: 1px solid #ddd;
+
+	&__main
+		padding: 0 10px;
+
+.cart
+	&__label
+		padding: 18px 0
+
+.info
+	font-size:12px
+
+	&__item
+		padding: 23px 0;
+		border-top 1px solid colorBorder
+
+		&:last-child
+			padding-bottom: 7px;
+
+		&-head
+			font-weight: bold
+
+		&-date
+			font-size:15px
+
+		&-text
+			line-height: 23px;
+
+.cart-links
+	padding-top: 42px;
+
+	&__link
+		link(colorMain,darken(colorMain, 20%),colorText,colorText)
+
+.cart-content
+	&__desc
+		font-weight: bold
+		color: #000
+		font-size: 16px;
+		margin: 17px 0;
+
+	&__content
+		padding: 22px 0;
+		border-top 1px solid colorBorder
+		margin-top: 10px;

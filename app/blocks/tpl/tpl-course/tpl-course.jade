@@ -1,0 +1,11 @@
+mixin tpl-course()
+	+b('template')#tpl-course.action-table__
+		+e.row.table-row(id="-id-" data-id_a="-id_a-")
+			+e.name.table-cell -name-
+			+e.items.table-cell
+				+e('ul').list
+			+e.icons.table-cell.clearfix
+				+e.icon_type_edit
+					+e('i').edit.icon-edit
+				+e.icon_type_delete
+					+e('i').delete.icon-delete

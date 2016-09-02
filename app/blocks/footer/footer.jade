@@ -1,0 +1,34 @@
+mixin footer()
+	-var list1 = ['О компании','Покупателям','Вопросы и ответы','Новости','Вакансии','Контакты']
+	-var list2 = ['Каталог','Антистрессовые Игрушки','Авто-визитки','Брелоки','Велосипеды','Детское творчество','Спортивные товары','Железные дороги']
+	-var list3 = ['Игровой ассортимент','Интерактивные Игрушки','Конструкторы','Куклы, пупсы','Сумки и Рюкзаки','Машинки','Мягкие игрушки']
+	-var list4 = ['Надувная продукция','Настольные игры','Новый Год','Трансформеры','для Новорожденных','Оружие','Песочные наборы']
+	-var list5 = ['Подушки','Радиоуправляемые модели','Развивающие игрушки','SALE']
+	+b.footer&attributes(attributes)
+		+b.inner
+			+b.row
+				+b.footer-item.clearfix.list-link__
+					+e('ul').list
+						each item in list1
+							+e('li').item
+								+e('a').link=item
+					+e('ul').list
+						each item in list2
+							+e('li').item
+								+e('a').link=item
+					+e('ul').list
+						each item in list3
+							+e('li').item
+								+e('a').link=item
+					+e('ul').list
+						each item in list4
+							+e('li').item
+								+e('a').link=item
+					+e('ul').list
+						each item in list5
+							+e('li').item
+								+e('a').link=item
+				+b.footer-bottom.clearfix
+					+e.brend ООО «Макситойз»
+					+e.address Москва, ул. Авангардная д.3
+					+e.phone +7 495 645 10 49

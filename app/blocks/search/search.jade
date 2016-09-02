@@ -1,0 +1,20 @@
+mixin search()
+	+b.menu-drop.menu-drop__search
+		+b.search
+			+e.head Мгновенный поиск
+			+e.desc Не тратьте время на листание каталога, сразу ищите то, что вам нужно: просто начните набирать название товара на клавиатуре и форма поиска появится сама, а поиск займет долю секунды!
+			+e.input-wrapper
+				+e('input').input(placeholder="Пони")
+			+e('ul').list.clearfix.results__
+				+e('li').item
+					+e('a').link
+						+e('img').img(src = 'assets/images/brends/tabs-1.png' alt="")
+						+e.name Зайка Танюшка, 20 см  (G-41-1078A6)
+						+e.code Арт. G-41-1078A6
+				+e('li').item
+					+e('a').link
+						+e('img').img(src = 'assets/images/brends/tabs-1.png' alt="")
+						+e.name Зайка Танюшка, 20 см  (G-41-1078A6)
+						+e.code Арт. G-41-1078A6
+		+b.menu-drop__bottom
+			+e.close свернуть

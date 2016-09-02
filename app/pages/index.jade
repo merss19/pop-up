@@ -1,0 +1,10 @@
+include /blocks/index/index
+
+extends /blocks/layout-default/layout-default
+//главная страница
+block head
+	- var pageTitle = 'Ethereum Jobs';
+block header
+	+header()
+block content
+	+index()
