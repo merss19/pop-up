@@ -1,4 +1,5 @@
 import gr from './gear';
+import {actions} from './data';
 /**
  * --------------------------------------------------------------------------
  * Bootstrap (v4.0.0-alpha.2): collapse.js
@@ -59,13 +60,19 @@ const Course = (($) => {
 
         constructor(course, rule) {
             console.log('constructor-course')
-
+            console.log(course)
+            console.log(rule)
             this.rule= $(rule)[0]
-            this.id = course.id
-            this.name = course.name
-            this.programs = course.programs ? course.programs : []
+            this.id = course.id_c
+            this.ipr = course.ipr_setting_id
+            this.name = course.program
+            this.actions = course.actions ? course.actions : []
             this.date_upto = course.date_upto ? course.date_upto : null
             //this.save()
+            console.log(this.rule)
+            console.log(this.id)
+            console.log(this.name)
+            console.log(this.actions)
 
         }
 
@@ -100,10 +107,13 @@ const Course = (($) => {
 
         render(){
             console.log('render')
+            console.log(this.rule)
+            console.log(this.id)
+            console.log(this.name)
             let programName = []
                 programName[this.id] = {
                     id: this.id,
-                    id_a: this.id,
+                    id_c: this.id,
                     name: this.name
             }
             if (!this.course) {
@@ -115,15 +125,16 @@ const Course = (($) => {
             this.course.find(Class.actionTableDelete).on('click', () => this.delete())
 
             console.log(this.course.find(Class.actionTableEdit))
-            this.rule.actionTableList = this.rule.actionTable.find(Class.actionTableList);
+            this.actionTableList = this.course.find(Class.actionTableList);
 
             // удалить из списка добавления развивающихся действий
             //this.selectAction.find('option[value="' + self.id + '"]').hide();
 
-            gr.tpl($(Tpl.courseItem).html(), this.programs, this.rule.actionTableList);
+            gr.tpl($(Tpl.courseItem).html(), this.actions, this.actionTableList);
 
-            console.log(this.programs)
-            console.log(this.rule.actionTableList)
+            console.log(this.course)
+            console.log(this.actions)
+            console.log(this.actionTableList)
 
         }
 
@@ -140,7 +151,8 @@ const Course = (($) => {
             let $this = $(this),
                 checkedCourses = this.rule.actionDescList.find('input:checked'),
                 dateCurr = this.getDate(),
-                programs = {}
+                programs = [],
+                programsArr
 
             $this.prop('disabled', true)
             console.log(dateCurr)
@@ -149,21 +161,28 @@ const Course = (($) => {
             if (checkedCourses.length) {
                 for (let i = 0; i < checkedCourses.length; i++) {
                     let programId = $(checkedCourses[i]).attr('data-program_id'),
+                        id = $(checkedCourses[i]).attr('data-id'),
                          label = $(checkedCourses[i]).next('label');
-
-                    programs[programId] = {
-                        id: programId,
+                    console.log(id)
+                    programs[i] = {
+                        id: id,
                         program_id: programId,
                         group_id: this.id,
-                        name: label.text(),
-                        date_upto: dateCurr == null ? null : dateCurr.getFullYear() + "-" + (dateCurr.getMonth() + 1) + "-" + dateCurr.getDate()
-                    };
+                        action: label.text()
+                    }
+                    /*programsArr[i] = {
+                        id: id,
+                        program_id: programId,
+                        group_id: this.id,
+                        action: label.text()
+                    };*/
                 }
             }
-            this.programs = programs
+            this.actions = programs
+
             this.render()
             this.rule.hideActionDesc()
-
+            console.log(this.actions)
             console.log(programs)
         }
 
@@ -177,34 +196,68 @@ const Course = (($) => {
 
             this.rule.actionDesc.addClass('inProcess');
 
+            // загрузить полный список доступных программ
+            // данные для аякс запроса
+            var jData = {
+                id: this.id,
+                ipr_setting_id: this.ipr_setting_id
+            };
+
             this.rule.actionDescBox.hide();
             this.rule.actionDesc.show();
             console.log(this.rule.actionDesc)
             //boss.actionDesc.append(indicatorbig);
             this.rule.actionDescList.empty();
 
-            let programs =[]
-                programs = [
-                    {
-                        id: 'selectItem-1',
-                        program_id: 22,        // id программы
-                        program_name: 'Программа1',    // наименование программы
-                        ipr_setting_id: 'Категория 1',   // категория, в которой лежит программа
-                        category_id: 222,         // правило, в котором находимся
-                        checked: 'checked'
-                    },
+            if(!this.actionCourse){
+                this.actionCourse = []
+                // получение данных с сервера
+                gr.go('::get_data_actions', jData, (data) => {
+                    //демо данные
 
-                    {
-                        id: 'selectItem-2',
-                        program_id: 33,        // id программы
-                        program_name: 'Программа2',    // наименование программы
-                        ipr_setting_id: 'Категория 2',   // категория, в которой лежит программа
-                        category_id: 333,         // правило, в котором находимся
-                        checked: ''
+                    data = actions
+                    console.log(data)
+
+                    for (let i = 0; i < data.length; i++) {
+
+                        this.actionCourse[i] = {
+                            id:data[i]['id'],
+                            course_id:data[i]['course_id'],
+                            program_id: data[i]['id'],
+                            course_name:data[i]['action'],
+                            checked: data[i]['checked'] ? 'checked' : ''
+                        }
                     }
-                ]
 
-            gr.tpl($(Tpl.actionDescList).html(), programs, this.rule.actionDescList)
+                })
+            }
+            console.log(this.actionCourse)
+            console.log(this.actions)
+            if(this.actions.length){
+                for (let i = 0; i <  this.actionCourse.length; i++) {
+                    this.actionCourse[i]['checked'] = ''
+                    console.log(this.actionCourse[i]['program_id'])
+                    console.log(this.actions.length)
+                    console.log(this.actions)
+                    for (let k = 0; k <  this.actions.length; k++) {
+                        console.log(k)
+                        console.log(this.actions[k]['program_id'])
+                        console.log((this.actionCourse[i]['program_id'] == this.actions[k]['program_id']))
+                        if (this.actionCourse[i]['program_id'] == this.actions[k]['program_id']){
+
+                            this.actionCourse[i]['checked'] = 'checked'
+                        }
+                    }
+
+                }
+                console.log(this.actionCourse)
+            }
+
+
+
+
+
+            gr.tpl($(Tpl.actionDescList).html(), this.actionCourse, this.rule.actionDescList)
 
             console.log(this.rule.actionDescList)
 

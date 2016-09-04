@@ -122,17 +122,27 @@ const Rule = (($) => {
 
             if(data){
                 this.dataRender = data
+                this.from.val(this.dataRender['answer_final_from_int'])
+                this.upto.val(this.dataRender['answer_final_upto_int'])
             }
             console.log(this.dataRender)
             console.log(this)
             console.log(this.from)
             //отрисовка баллов
-            this.from.val(this.dataRender['answer_final_from_int']);
-            this.upto.val(this.dataRender['answer_final_upto_int']);
+            console.log(this.actionTable)
 
             //отрисовка программ
-           /* self.actionTable.empty();
-            self.actionList.show();*/
+            this.actionTable.empty()
+            this.actionList.show()
+
+            let programs = data.programs
+            console.log(programs)
+
+            for (let p in programs) {
+                 let course = new Course(programs[p],this);
+                 console.log(course)
+                 course.render();
+            }
 
         }
 
@@ -172,17 +182,19 @@ const Rule = (($) => {
             console.log('_addCourse')
 
             let $action = this.ruleObj.find(Class.select + ' option:selected'),
+                ipr = this.ruleObj.attr('data-ipr_setting_id'),
 
                 courseId = $action.attr('data-id_c'),
                 courseName = $action.text(),
 
                 action = {
-                    id: courseId,
-                    name: courseName
+                    id_c: courseId,
+                    program: courseName,
+                    ipr_setting_id:ipr
                 }
             console.log($action)
             this.actionList.show()
-
+            console.log(this)
             let course = new Course(action,this);
             console.log(course)
             course.edit();
@@ -215,7 +227,7 @@ const Rule = (($) => {
                 }
 
 
-                console.log(config.method)
+
                 if (typeof config === 'object') {
                     if (data[config.method] === undefined) {
                         throw new Error(`No method named "${config.method}"`)
