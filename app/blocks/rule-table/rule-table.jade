@@ -1,13 +1,22 @@
 mixin rule-table()
 	+b.rule-table.table(data-user = "user-1")
 		+e.head.table-row
-			+e.head-item.table-cell Управление товарными категориями
+			+e.head-item.table-cell Имя сотрудника
 			+e.head-item.table-cell(colspan="2") Развивающее действие
 		+e.item.table-row(data-category = "category-1")
-			+e.cell.table-cell Знает и может назвать конкурентыне пары всех SKU продукции компании
-			+e.cell.table-cell Курс «Я и мой продукт Мясопереработка»
-			+e('button').edit.table-cell.icon-edit.btn-modal(type="button",data-toggle="modal", data-target=".rule-modal")
-		+e.item.table-row(data-category = "category-2",)
-			+e.cell.table-cell Демонстрирует лучший результат дистрибуции новинок на своем маршруте
-			+e.cell.table-cell
-				+b('button').btn.btn-primary.btn-modal(type="button",data-toggle="modal", data-target=".rule-modal") Добавить правило
+			+e.name.table-cell Андреев Эльдар
+			+e.action.table-cell
+				+e('button').btn.btn.btn-primary.btn-modal.hide(type="button",data-toggle="modal", data-target=".rule-modal") Добавить правило
+				+e('button').edit.icon-edit.btn-modal(type="button",data-toggle="modal", data-target=".rule-modal")
+
+		+e.item.table-row(data-category = "category-3")
+			+e.name.table-cell Кортеев Игорь
+			+e.action.table-cell
+				+e('button').edit.icon-edit.btn-modal.hide(type="button",data-toggle="modal", data-target=".rule-modal")
+				+e('button').btn.btn.btn-primary.btn-modal(type="button",data-toggle="modal", data-target=".rule-modal") Добавить правило
+
+		+e.item.table-row(data-category = "category-3",)
+			+e.name.table-cell Полякова Анна
+			+e.action.table-cell
+				+e('button').edit.icon-edit.btn-modal.hide(type="button",data-toggle="modal", data-target=".rule-modal")
+				+e('button').btn.btn.btn-primary.btn-modal(type="button",data-toggle="modal", data-target=".rule-modal") Добавить правило

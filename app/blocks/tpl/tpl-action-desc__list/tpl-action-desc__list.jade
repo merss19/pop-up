@@ -1,5 +1,5 @@
 mixin tpl-action-desc__list()
 	+b('template')#tpl-action-desc__list.action-desc__
 		+e.item
-			+b('input')(id="-course_id-" type="checkbox"  data-id = "-id-", data-program_id ="-program_id-", '-checked-')
+			+e('input').input(id="-course_id-" type="checkbox"  data-id = "-id-", data-program_id ="-program_id-", '-checked-')
 			+b('label')(for="-course_id-") -course_name-

@@ -1,0 +1,58 @@
+.action-table
+	display: none
+	margin-bottom:0
+
+	&__list
+		margin-bottom:0
+		padding-left:20px
+
+	&__item
+		position: relative
+		padding: 2px 0;
+
+		&:before
+			content: ''
+			display: block
+			width:10px
+			height: 2px
+			border-radius: 8px
+			background: colorMain
+			position: absolute
+			top: 11px;
+			left: -18px;
+
+	.table-row
+		&:last-child
+			.table-cell
+				border-bottom:none
+
+	.table-cell
+		border:1px solid colorBorder
+		padding:8px
+		vertical-align: middle;
+
+		&:first-child
+			border-left none
+
+		&:last-child
+			border-right none
+
+	&__icons
+		width: 86px;
+
+	&__icon
+		display: inline-block
+		padding:0 8px
+		cursor: pointer
+		margin-top: 5px;
+
+	&__no-course
+		display: none
+		color: colorBorder
+		font-size: 18px;
+		text-align: center;
+
+
+	&__name
+		text-align: center;
+		font-size: 16px;

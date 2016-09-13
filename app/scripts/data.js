@@ -8,7 +8,7 @@ export let dataRule = [
                 "answer_final_from_int": 3,
                 "answer_final_upto_int":7,
                 "programs":[
-                    {   "id_c":"course-3",
+                    {   "id_c":"pr-1",
                         "program":"Персонал",
                         "actions":[
                             {   "id":7,
@@ -64,7 +64,7 @@ export let dataRule = [
                 "answer_final_from_int": 1,
                 "answer_final_upto_int":5,
                 "programs":[
-                    {   "id_c":"course-1",
+                    {   "id_c":"pr-2",
                         "program":"Мясопереработка",
                         "actions":[
 
@@ -85,7 +85,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-23",
+                    {   "id_c":"pr-7",
                         "program":"Маркетинг",
                         "actions":[
                             {   "id":7,
@@ -100,7 +100,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-3",
+                    {   "id_c":"pr-1",
                         "program":"Персонал",
                         "actions":[
                             {   "id":7,
@@ -170,7 +170,7 @@ export let dataRule = [
                 "answer_final_from_int": 2,
                 "answer_final_upto_int":6,
                 "programs":[
-                    {   "id_c":"course-1",
+                    {   "id_c":"pr-2",
                         "program":"Мясопереработка",
                         "actions":[
 
@@ -191,7 +191,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-2",
+                    {   "id_c":"pr-3",
                         "program":"Товары и услуги",
                         "actions":[
                             {   "id":7,
@@ -211,7 +211,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-3",
+                    {   "id_c":"pr-1",
                         "program":"Персонал",
                         "actions":[
 
@@ -277,7 +277,7 @@ export let dataRule = [
 
     },
     {
-        categoryId:'category-2',
+        categoryId:'category-3',
         rules:[
             {
                 "id_r":111,
@@ -285,7 +285,7 @@ export let dataRule = [
                 "answer_final_from_int": 4,
                 "answer_final_upto_int":6,
                 "programs":[
-                    {   "id_c":"course-1",
+                    {   "id_c":"pr-2",
                         "program":"Мясопереработка",
                         "actions":[
                             {   "id":1,
@@ -305,7 +305,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-2",
+                    {   "id_c":"pr-3",
                         "program":"Товары и услуги",
                         "actions":[
                             {   "id":1,
@@ -330,7 +330,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-3",
+                    {   "id_c":"pr-1",
                         "program":"Персонал",
                         "actions":[
 
@@ -342,7 +342,7 @@ export let dataRule = [
 
                         ]
                     },
-                    {   "id_c":"course-23",
+                    {   "id_c":"pr-2",
                         "program":"Маркетинг",
                         "actions":[
                             {   "id":1,
@@ -410,7 +410,7 @@ export let dataRule = [
                 "answer_final_from_int": 2,
                 "answer_final_upto_int":7,
                 "programs":[
-                    {   "id_c":"course-13",
+                    {   "id_c":"pr-4",
                         "program":"Упущенная прибыль",
                         "actions":[
 
@@ -432,7 +432,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-23",
+                    {   "id_c":"pr-7",
                         "program":"Маркетинг",
                         "actions":[
                             {   "id":44,
@@ -452,7 +452,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-3",
+                    {   "id_c":"pr-1",
                         "program":"Персонал",
                         "actions":[
                             {   "id":1,
@@ -521,7 +521,7 @@ export let dataRule = [
                 "answer_final_from_int": 4,
                 "answer_final_upto_int":8,
                 "programs":[
-                    {   "id_c":"course-2",
+                    {   "id_c":"pr-3",
                         "program":"Товары и услуги",
                         "actions":[
 
@@ -532,7 +532,7 @@ export let dataRule = [
                             }
                         ]
                     },
-                    {   "id_c":"course-3",
+                    {   "id_c":"pr-1",
                         "program":"Персонал",
                         "actions":[
                             {   "id":11,
@@ -548,6 +548,42 @@ export let dataRule = [
                             }
                         ]
                     }
+                ],
+                "selectPrograms" : [
+                    {
+                        "id":"pr-1",
+                        "program":"Персонал"
+
+                    },
+
+                    {
+                        "id":"pr-2",
+                        "program":"Мясопереработка"
+                    },
+
+                    {
+                        "id":"pr-3",
+                        "program":"Товары и услуги"
+                    },
+                    {
+                        "id":"pr-4",
+                        "program":"Упущенная прибыль"
+                    },
+
+                    {
+                        "id":"pr-5",
+                        "program":"Дельта(помесячно)"
+                    },
+
+                    {
+                        "id":"pr-6",
+                        "program":"Клиенты"
+                    },
+                    {
+                        "id": "pr-7",
+                        "program": "Маркетинг"
+                    }
+
                 ]
             },
             {
@@ -556,7 +592,7 @@ export let dataRule = [
                 "answer_final_from_int": 1,
                 "answer_final_upto_int":8,
                 "programs":[
-                    {   "id_c":"course-2",
+                    {   "id_c":"pr-3",
                         "program":"Товары и услуги",
                         "actions":[
 
@@ -577,6 +613,42 @@ export let dataRule = [
                             }
                         ]
                     }
+                ],
+                "selectPrograms" : [
+                    {
+                        "id":"pr-1",
+                        "program":"Персонал"
+
+                    },
+
+                    {
+                        "id":"pr-2",
+                        "program":"Мясопереработка"
+                    },
+
+                    {
+                        "id":"pr-3",
+                        "program":"Товары и услуги"
+                    },
+                    {
+                        "id":"pr-4",
+                        "program":"Упущенная прибыль"
+                    },
+
+                    {
+                        "id":"pr-5",
+                        "program":"Дельта(помесячно)"
+                    },
+
+                    {
+                        "id":"pr-6",
+                        "program":"Клиенты"
+                    },
+                    {
+                        "id": "pr-7",
+                        "program": "Маркетинг"
+                    }
+
                 ]
 
             }

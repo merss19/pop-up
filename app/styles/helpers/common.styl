@@ -150,12 +150,26 @@ img
 	display: table-cell
 
 .icon-edit
+	border: none;
+	background: transparent;
+	outline:none;
+
+	&:active,
+	&:focus {
+		outline: none;
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
+	}
+
 	&:before
 		content: ''
 		background: url("../img/edit.png");
 		display: block
 		width: 16px;
 		height: 16px;
+		outline:none;
 
 .icon-delete
 	&:before

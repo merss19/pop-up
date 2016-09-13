@@ -1,5 +1,6 @@
 import gr from './gear';
 import {actions} from './data';
+import {Class, TplName, Tpl, loading,Constant} from './constClass';
 /**
  * --------------------------------------------------------------------------
  * Bootstrap (v4.0.0-alpha.2): collapse.js
@@ -21,40 +22,7 @@ const Course = (($) => {
     const EVENT_KEY           = `.${DATA_KEY}`
     const JQUERY_NO_CONFLICT  = $.fn[NAME]
 
-    const ClassName = {
-        actionTableEdit: 'action-table__icon_type_edit',
-        actionTableDelete: 'action-table__icon_type_delete',
-        actionTableList: 'action-table__list'
 
-
-    }
-
-    const Class = {
-        actionTableEdit: `.${ClassName.actionTableEdit}`,
-        actionTableDelete: `.${ClassName.actionTableDelete}`,
-        actionTableList: `.${ClassName.actionTableList}`
-    }
-
-    const TplName = {
-        actionDescList:'action-desc__list',
-        course:'course',
-        courseItem:'course-item'
-    }
-
-    const Tpl = {
-        actionDescList:`#tpl-${TplName.actionDescList}`,
-        course:`#tpl-${TplName.course}`,
-        courseItem:`#tpl-${TplName.courseItem}`
-
-    }
-
-    const Default = {}
-
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
 
     class Course {
 
@@ -68,11 +36,11 @@ const Course = (($) => {
             this.name = course.program
             this.actions = course.actions ? course.actions : []
             this.date_upto = course.date_upto ? course.date_upto : null
+            this.table = this.rule.actionTable
+            this.indicator = loading
             //this.save()
             console.log(this.rule)
-            console.log(this.id)
-            console.log(this.name)
-            console.log(this.actions)
+
 
         }
 
@@ -107,9 +75,7 @@ const Course = (($) => {
 
         render(){
             console.log('render')
-            console.log(this.rule)
-            console.log(this.id)
-            console.log(this.name)
+
             let programName = []
                 programName[this.id] = {
                     id: this.id,
@@ -117,37 +83,125 @@ const Course = (($) => {
                     name: this.name
             }
             if (!this.course) {
-                this.course = gr.tpla($(Tpl.course).html(), programName, this.rule.actionTable)
+                this.course = gr.tpla($(Tpl.course).html(), programName, this.table)
             }
-            console.log(programName)
+
 
             this.course.find(Class.actionTableEdit).on('click', () => this.edit())
             this.course.find(Class.actionTableDelete).on('click', () => this.delete())
 
-            console.log(this.course.find(Class.actionTableEdit))
-            this.actionTableList = this.course.find(Class.actionTableList);
 
-            // удалить из списка добавления развивающихся действий
-            //this.selectAction.find('option[value="' + self.id + '"]').hide();
+            this.actionTableList = this.course.find(Class.actionTableList);
+            this.table.show()
+
+
 
             gr.tpl($(Tpl.courseItem).html(), this.actions, this.actionTableList);
 
-            console.log(this.course)
-            console.log(this.actions)
+            console.log($(Tpl.courseItem).html())
             console.log(this.actionTableList)
 
+            // удалить из списка добавления программ
+            console.log(Constant.select)
+            $(this.rule.selectInput).text(Constant.select)
+
+
+            this.updateSelect(this.id, 'hide')
+            this.updateNoAction()
+            this._updateNoCourse()
+
+
+
+        }
+
+        updateNoAction() {
+
+            if (this.table.find('.table-row').length == 0) {
+                this.rule.noAction.show();
+                this.table.hide()
+            } else {
+                this.rule.noAction.hide();
+                this.table.show()
+            }
+        }
+
+        _updateNoCourse() {
+            console.log('_updateNoCourse')
+            let checkedCourses = this.rule.actionDescList.find('input:checked')
+            console.log(this.actions)
+            this.actionTableNoCourse = this.course.find(Class.actionTableNoCourse);
+            if (checkedCourses.length == 0 && this.actions == 0) {
+
+                this.actionTableNoCourse.show();
+            } else {
+                this.actionTableNoCourse.hide();
+            }
+        }
+
+        updateSelect(programId, action){
+            let options = this.rule.selectOption,
+                optionsLen = options.length
+            console.log(options)
+            console.log( optionsLen)
+            for (let i = 0; i < optionsLen; i++) {
+                let id = $(options[i]).attr('data-id_c')
+                console.log(programId)
+                if(id == programId) {
+                    switch (action) {
+                        case 'hide':
+                            $(options[i]).hide()
+                            break
+                        case 'show':
+                            $(options[i]).show()
+                            break
+                    }
+                }
+            }
         }
 
 
 
         delete(){
             console.log('delete-course')
+
+
+            // данные для аякс запроса
+
+               let jData = {
+                   id_c: this.id,
+                   name: this.name
+                };
+
+            this.icons = this.course.find(Class.icons)
+            this.icon = this.course.find(Class.icon)
+
+                        this.icon.hide()
+                        this.icons.append(this.indicator);
+
+            gr.go('::delete_program', jData, (d) => {
+               /* if (d.error) {
+                    alert('Не могу удалить одну или несколько програм! Обратитесь к администратору.');
+                    this.course.find('img').remove()
+                    this.icon.show();
+                    return false;
+                }*/
+
+                this.course.remove()
+
+
+                // вернуть в список добавления развивающихся действий
+                let id = this.course.attr('data-id_c')
+
+                this.updateSelect(id, 'show')
+
+                this.updateNoAction()
+            });
         }
 
 
         save() {
             console.log('save')
-            console.log(this)
+
             let $this = $(this),
                 checkedCourses = this.rule.actionDescList.find('input:checked'),
                 dateCurr = this.getDate(),
@@ -155,10 +209,9 @@ const Course = (($) => {
                 programsArr
 
             $this.prop('disabled', true)
-            console.log(dateCurr)
-            console.log(checkedCourses)
 
-            if (checkedCourses.length) {
+
+
                 for (let i = 0; i < checkedCourses.length; i++) {
                     let programId = $(checkedCourses[i]).attr('data-program_id'),
                         id = $(checkedCourses[i]).attr('data-id'),
@@ -177,18 +230,18 @@ const Course = (($) => {
                         action: label.text()
                     };*/
                 }
-            }
+
             this.actions = programs
 
             this.render()
-            this.rule.hideActionDesc()
+            this.rule._hideActionDesc()
             console.log(this.actions)
             console.log(programs)
         }
 
         edit() {
             console.log('edit-course')
-            console.log(this.rule)
+
             //console.log(this.rule.actionDescList)
             if (this.rule.actionDesc.hasClass('inProcess')) {
                 return false;
@@ -203,9 +256,9 @@ const Course = (($) => {
                 ipr_setting_id: this.ipr_setting_id
             };
 
-            this.rule.actionDescBox.hide();
-            this.rule.actionDesc.show();
-            console.log(this.rule.actionDesc)
+
+            this.rule._showActionDesc();
+
             //boss.actionDesc.append(indicatorbig);
             this.rule.actionDescList.empty();
 
@@ -231,9 +284,8 @@ const Course = (($) => {
 
                 })
             }
-            console.log(this.actionCourse)
-            console.log(this.actions)
-            if(this.actions.length){
+
+
                 for (let i = 0; i <  this.actionCourse.length; i++) {
                     this.actionCourse[i]['checked'] = ''
                     console.log(this.actionCourse[i]['program_id'])
@@ -250,8 +302,8 @@ const Course = (($) => {
                     }
 
                 }
-                console.log(this.actionCourse)
-            }
+
+
 
 
 
@@ -259,27 +311,30 @@ const Course = (($) => {
 
             gr.tpl($(Tpl.actionDescList).html(), this.actionCourse, this.rule.actionDescList)
 
-            console.log(this.rule.actionDescList)
+
 
             this.rule.actionDescList.show();
-            //boss.showActionDesc($html ? $html.offset().top : 0);
             this.rule.actionDesc.removeClass('inProcess');
 
             this.rule.addBtn.prop('disable', false);
             this.rule.addBtn.off('click.addSetting');
             this.rule.addBtn.on('click.addSetting', () => this.save())
+
+            this.rule.cancelBtn.off('click.cancelSetting');
+            this.rule.cancelBtn.on('click.cancelSetting', () => this.cancel())
+
     }
 
+        cancel(e){
+
+            this.rule._hideActionDesc()
+            $(this.rule.selectInput).removeClass('active').text(Constant.select)
 
 
-        // private
-
-
-        _select() {
-            console.log('_select')
-            console.log(this.select)
 
         }
+
+        // private
 
 
 

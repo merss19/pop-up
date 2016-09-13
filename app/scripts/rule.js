@@ -1,10 +1,7 @@
 import Course from './course';
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-alpha.2): collapse.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * --------------------------------------------------------------------------
- */
+import gr from './gear';
+import {Class, TplName, Tpl, loading, Constant, Data, Event} from './constClass';
+
 
 const Rule = (($) => {
 
@@ -14,134 +11,102 @@ const Rule = (($) => {
      * Constants
      * ------------------------------------------------------------------------
      */
-
     const NAME                = 'rule'
     const DATA_KEY            = 'rule'
     const EVENT_KEY           = `.${DATA_KEY}`
     const JQUERY_NO_CONFLICT  = $.fn[NAME]
 
-    const ClassName = {
-        select: 'select-action',
-        noAction: 'action-rule__no-action',
-        actionList: 'action-list',
-        actionDesc: 'action-desc',
-        actionDescBox: 'action-desc__box',
-        actionDescList: 'action-desc__list',
-        addBtn: 'action-desc__add',
-        addCancel: 'action-desc__cancel',
-        selectAction: 'select-action',
-        actionTable: 'action-table',
-        course: 'action-table_todo-courseItems',
-        actionTableEdit: 'action-table__edit',
-        actionTableDelete: 'action-table__delete',
-        actionTableList: 'action-table__ul',
-        from: 'action-rule__input_type_from',
-        upto:'action-rule__input_type_upto'
-
-    }
-
-    const Class = {
-        select: `.${ClassName.select}`,
-        noAction:`.${ClassName.noAction}`,
-        actionList: `.${ClassName.actionList}`,
-        actionDesc: `.${ClassName.actionDesc}`,
-        actionDescBox: `.${ClassName.actionDescBox}`,
-        actionDescList: `.${ClassName.actionDescList}`,
-        addBtn: `.${ClassName.addBtn}`,
-        addCancel: `.${ClassName.addCancel}`,
-        selectAction: `.${ClassName.selectAction}`,
-        actionTable: `.${ClassName.actionTable}`,
-        course: `.${ClassName.course}`,
-        actionTableEdit: `.${ClassName.actionTableEdit}`,
-        actionTableDelete: `.${ClassName.actionTableDelete}`,
-        actionTableList: `.${ClassName.actionTableList}`,
-        from: `.${ClassName.from}`,
-        upto: `.${ClassName.upto}`
-    }
-
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
 
     class Rule {
 
         constructor(rule) {
-            console.log('constructor')
-            console.log(rule)
             this.ruleObj = $(rule)
+            this.modalBody = this.ruleObj.closest(Class.modalBody)
+            this.modalContent = this.ruleObj.closest(Class.modalContent)
+            this.modalList = this.ruleObj.closest(Class.modalList)
+            this.noRule = this.modalBody.find(Class.noRule)
             this.select = this.ruleObj.find(Class.select)
             this.noAction = this.ruleObj.find(Class.noAction)
             this.actionList = this.ruleObj.find(Class.actionList)
-            //this.actionDesc = this.rule.find(Class.actionDesc)
-            this.actionDesc = this.ruleObj.closest('.modal-body').find(Class.actionDesc)
+            this.close = this.ruleObj.find(Class.close)
+            this.actionDesc = this.ruleObj.closest(Class.modalBody).find(Class.actionDesc)
             this.actionDescBox = this.actionDesc.find(Class.actionDescBox)
             this.actionDescList = this.actionDesc.find(Class.actionDescList)
             this.addBtn = this.actionDesc.find(Class.addBtn)
+            this.cancelBtn = this.actionDesc.find(Class.cancelBtn)
             this.addCancel = this.actionDesc.find(Class.addCancel)
             this.selectAction = this.ruleObj.find(Class.selectAction)
+            this.selectInput = this.ruleObj.find(Class.selectInput)
+            this.selectList = this.ruleObj.find(Class.selectList)
+            this.selectOption = this.ruleObj.find(Class.selectOption)
             this.actionTable = this.actionList.find(Class.actionTable)
-            this.course = this.actionTable.find(ClassName.course)
-            this.edit = this.actionTable.find(ClassName.edit)
-            this.delete = this.ruleObj.find(ClassName.delete)
+            this.actionRuleCollapse = this.ruleObj.find(Class.actionRuleCollapse)
+            this.actionRuleTrigger = this.ruleObj.find(Class.actionRuleTrigger)
+            this.id_r= this.ruleObj.attr(Data.idR)
+            this.iprId= this.ruleObj.attr(Data.iprId)
             this.from = this.ruleObj.find(Class.from)
             this.upto = this.ruleObj.find(Class.upto)
-            console.log(this.ruleObj)
+
+            this.close.on(Event.clickDelete, () => this._delete())
             this._select()
 
+            this.actionDesc.on(Event.actionDescShown,  (e) => {
 
+                //закрыть поповер при клике мимо него
+                setTimeout(() => {
+                    $(document.body).on(Event.clickHideActionDesc, (e)=> {
+
+                        if (!$(e.target).closest(Class.actionDesc).length) {
+
+                            this._hideActionDesc()
+                            $(this.selectInput).removeClass('active').text(Constant.select)
+
+                        }
+
+                    })
+                },1)
+
+            })
+
+            this.actionRuleCollapse.on('show.bs.collapse', (e) => {
+                this.actionRuleTrigger.addClass('active')
+
+                this.modalList.find('.collapse.in').collapse('hide')
+            })
+
+
+            this.actionRuleCollapse.on('hide.bs.collapse', (e) => {
+
+                this.actionRuleTrigger.removeClass('active')
+
+            })
         }
 
-
-        // getters
-
-
-     /*   static get VERSION() {
-            return VERSION
-        }
-
-        static get Default() {
-            return Default
-        }
-*/
 
         // public
 
-
-        hideActionDesc(){
-            console.log('hideActionDesc')
-            this.actionDesc.hide();
-            //this.selectAction.val('select');
-            $(document.body).off('click.hideActionDesc');
-        }
-
         render(data){
-            console.log('render')
-            console.log(this.ruleObj)
 
             if(data){
                 this.dataRender = data
                 this.from.val(this.dataRender['answer_final_from_int'])
                 this.upto.val(this.dataRender['answer_final_upto_int'])
             }
-            console.log(this.dataRender)
-            console.log(this)
-            console.log(this.from)
-            //отрисовка баллов
+
+            //рендеринг баллов
             console.log(this.actionTable)
 
-            //отрисовка программ
+            //рендеринг программ
             this.actionTable.empty()
             this.actionList.show()
 
             let programs = data.programs
-            console.log(programs)
+
 
             for (let p in programs) {
-                 let course = new Course(programs[p],this);
-                 console.log(course)
-                 course.render();
+                 let course = new Course(programs[p],this)
+                    //рендеринг курсов
+                 course.render()
             }
 
         }
@@ -150,83 +115,126 @@ const Rule = (($) => {
 
         // private
 
+        _hideActionDesc(){
 
-        _select() {
-            console.log('_select')
-            console.log(this.select)
+            this.actionDesc.hide();
+            $(document.body).off(Event.clickHideActionDesc);
+        }
 
-            this.select.on('change', () => {
+        _showActionDesc(){
 
-                this.noAction.hide()
+            this.actionDesc.show();
+            this.actionDesc.trigger($.Event(Event.actionDescShown))
 
-                //определяем выбранный селект
-                let $selected = this.ruleObj.find(Class.select + ' option:selected'),
+        }
 
-                    actionId = $selected.attr('data-id'),
-                    courseId = $selected.attr('data-id_c')
+        _delete(){
 
-                    console.log($selected)
-                    console.log(actionId)
-                    console.log(courseId)
+            // данные для аякс запроса
+            let jData = {
+                ipr_setting_id: this.iprId,
+                id_r: this.id_r,
 
-                // что выбрано, курс или действие
-                if (courseId) {
-                    this._addCourse()
-                } else if (actionId) {
-                    this._addAction()
-                }
+            };
+
+            // Ajax запрос на удаление правила из бд
+            gr.go('::ipr_delete_rule', jData,  (d) => {
+                this.close.html(loading);
+                /*if (d.error) {
+                    // Ошибка во входных параметрах.
+                 this.close.html('Удалить правило');
+                    alert('Не могу удалить правило! Обратитесь к администратору.');
+                } else {
+                    this.ruleObj.remove();
+                    //self.updateNoActionMsg();
+                }*/
+                this.ruleObj.remove();
+                this._updateNoRule()
             });
         }
 
+        _updateNoRule() {
+            if (this.modalList.find(Class.actionRule).length == 0){
+                this.noRule.show();
+            } else {
+                this.noRule.hide();
+            }
+        }
+
+
+        _select() {
+            let input = this.selectInput,
+                list = this.selectList,
+                self = this
+
+            $(document.body).off(Event.clickSelect)
+
+            input.on('click', () => {
+
+                list.toggle()
+                input.toggleClass('active')
+
+                $(document.body).on(Event.clickSelect, (e)=> {
+
+                    if (!$(e.target).closest(Class.select).length) {
+                        list.hide()
+                        input.removeClass('active')
+                    }
+
+                })
+
+
+                this.selectOption.on('click', function() {
+
+                    let value = $(this).attr(Data.value),
+                        id = $(this).attr(Data.idC)
+
+                    input.text(value)
+                    list.hide()
+
+                    input.toggleClass('active')
+
+                    input.attr(Data.idC, id)
+                    self._addCourse()
+
+                })
+
+
+            })
+        }
+
         _addCourse(){
-            console.log('_addCourse')
+            let
+                ipr = this.ruleObj.attr(Data.iprId),
 
-            let $action = this.ruleObj.find(Class.select + ' option:selected'),
-                ipr = this.ruleObj.attr('data-ipr_setting_id'),
+                courseId = this.selectInput.attr(Data.idC),
+                courseName = this.selectInput.text()
 
-                courseId = $action.attr('data-id_c'),
-                courseName = $action.text(),
-
-                action = {
+                this.action = {
                     id_c: courseId,
                     program: courseName,
                     ipr_setting_id:ipr
                 }
-            console.log($action)
+
             this.actionList.show()
-            console.log(this)
-            let course = new Course(action,this);
-            console.log(course)
+
+            let course = new Course(this.action,this);
+
             course.edit();
 
         }
 
-        _addAction(){
-            console.log('_addAction')
-        }
-
-
         // static
-
         static _init(config) {
             return this.each(function () {
-                console.log('_init')
+
 
                 let $this = $(this),
                     data  = $this.data(DATA_KEY)
-                console.log(config)
+
                 if (!data) {
                     $this.data(DATA_KEY, (data = new Rule($this)))
                 }
-                console.log(data)
-                if (typeof config === 'string') {
-                    if (data[config] === undefined) {
-                        throw new Error(`No method named "${config}"`)
-                    }
-                    data[config].call($this)
-                }
-
-
 
                 if (typeof config === 'object') {
                     if (data[config.method] === undefined) {

@@ -3,20 +3,46 @@
 	margin: auto;
 
 	.table-cell
-		padding: 8px 18px;
+		height: 70px;
 		vertical-align: middle
 		border:1px solid colorBorder
+		text-align: center;
+		padding: 10px;
 
 	&__head
 		background:colorBorder
 
+		.rule-table__head-item
+			&:first-child{
+				border-right: 1px solid #eee;
+			}
+
 		&-item
 			text-align: center;
 			padding:8px
+			font-size: 18px;
 
-	&__cell
-		text-align: center;
-		padding: 8px
+	&__name
+		width:70%
+		font-size: 16px;
+
+	&__action
+		width: 30%
 
 	&__edit
 		cursor: pointer
+		outline none
+
+	&__btn
+		outline: none
+		border:none
+
+		&:active,
+		&:active:focus,
+		&:focus {
+			outline: none;
+		}
+
+		&::-moz-focus-inner {
+			border: 0;
+		}

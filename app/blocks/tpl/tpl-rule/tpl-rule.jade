@@ -1,20 +1,22 @@
 mixin tpl-rule()
 	+b('template')#tpl-rule
 		+b.action-rule.clearfix(data-id_r="-id_r-",data-ipr_setting_id="-ipr_setting_id-")
-			+e.item
-				+e.trigger(data-toggle="collapse", data-target='#'+"-collapse-")
-				+e('label').label Условие:
-				+e('input').input_type_from(type="text", value="3")
-			+e.item
-				+e('label').label Балл:
-				+e('input').input_type_upto(type="text", value="5")
-			+e.close Удалить правило
+			+e.top.clearfix
+				+e.item
+					+e.trigger(data-toggle="collapse", data-target='#'+"-collapse-")
+					+e('label').label Условие:
+					+e('input').input_type_from(type="text", value="")
+				+e.item
+					+e('label').label Балл:
+					+e('input').input_type_upto(type="text", value="")
+				+e.close Удалить правило
 			+e.collapse.collapse(id="-collapse-")
 				+e.inner
 					+b.add-action__
-						+e('select').select.select-action
-							+b('option')(value="select" selected) Добавить развивающее действие
+						+e.select.select-action
+							+e.input(data-value="select") Добавить развивающее действие
+							+e.list
+						+e.no-action Нет развивающих действий
 					+b.action-list
 						+e.item
 							+b.action-table.table
-			+e.no-action нет действий

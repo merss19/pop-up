@@ -8,21 +8,14 @@ mixin rule-modal()
 				+b.modal-body
 					+b.rule-modal__body
 						+b.rule-modal__list
+					+b.rule-modal__no-rule Нет правил
 					+b.rule-modal__btn
 						+b('button').btn.btn-primary(type="button") Добавить правило
-					+b.action-desc(data-ipr_setting_id="-ipr_setting_id-")
-						+e.arrow
+					+b.action-desc
 						+e.inner
-							+e.box
-								+e('h3').header Описание специального развивающего действия
-								+e('textarea').text
-								+e.notice Осталось
-									+e('span') 150
-									| символов
 							+e.list
 						+e.bottom
 							+e.add.btn.btn-primary(type="button") Добавить
 							+e.cancel.btn.btn-primary(type="button") Отмена
 				+b.modal-footer
-					+b('button').btn.btn-secondary(data-dismiss="modal",type="button") Close
-					+b('button').btn.btn-primary(data-dismiss="modal",type="button") Save changes
+					+b('button').rule-modal__save.btn.btn-primary(data-dismiss="modal",type="button") Сохранить

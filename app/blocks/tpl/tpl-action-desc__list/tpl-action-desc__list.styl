@@ -1,0 +1,91 @@
+.action-desc
+	position: absolute;
+	display: none
+	top: 0;
+	bottom: -68px;
+	left: 29%;
+	right: 2px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	background-color: #fff;
+	padding: 10px;
+	z-index: 1;
+	margin-right: -1px;
+
+	&__inner
+		overflow: auto;
+		position: absolute;
+		padding: 10px 15px;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 68px;
+
+	&__list
+		padding-top: 20px;
+
+	&__header
+		font-size: 16px;
+		line-height: 16px;
+
+
+	&__box
+		border:1px solid colorAdd
+		height: 80px;
+		width: 100%;
+		margin-bottom: 0;
+
+
+	&__notice
+		float: right;
+		color: colorBorder;
+
+
+	&__bottom
+		position: absolute;
+		background: #fff;
+		padding: 14px;
+		width: 100%;
+		text-align: center;
+		border-top: 1px solid #e5e5e5;
+		left: 0;
+		right: 0;
+		bottom: 1px;
+
+	&__input
+		display: none
+
+		&:checked +label
+			&:before
+				background: colorMain
+
+
+		& + label
+			cursor: pointer
+
+			&:before
+				content: ''
+				display: inline-block
+				width:14px
+				height:14px
+				background: #fff
+				border:1px solid colorMain
+				vertical-align: middle;
+				margin-right: 9px;
+				margin-top: -2px;
+
+	&__arrow
+		content: '';
+		display: block;
+		position: absolute;
+		top: 18px;
+		width: 15px;
+		height: 15px;
+		border-right: 1px solid #DDD;
+		border-bottom: 1px solid #DDD;
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		transform: rotate(135deg);
+		left: -8px;
+		background: #fff

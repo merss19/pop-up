@@ -3,7 +3,8 @@ mixin tpl-course()
 		+e.row.table-row(id="-id-" data-id_c="-id_c-")
 			+e.name.table-cell -name-
 			+e.items.table-cell
-				+e('ul').list
+				+e.list
+				+e.no-course нет выбранных курсов
 			+e.icons.table-cell.clearfix
 				+e.icon_type_edit
 					+e('i').edit.icon-edit
