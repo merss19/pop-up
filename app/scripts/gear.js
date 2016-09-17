@@ -12,7 +12,7 @@ const gr = (($) => {
 
         go: function (url,jData, done) {
             let data
-            return  done(data) //имитация post запроса на сервер
+            return  done(data) // post запрос на сервер
        /*   return $.post(url, jData, function (data) {
 
                 if (!data.error) {
@@ -53,11 +53,6 @@ const gr = (($) => {
         }
 
     }
-
-
-
-
-
     return Gr
 
 })(jQuery)

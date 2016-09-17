@@ -1,10 +1,9 @@
-# Магазин игрушек(верстка)
+# Модальное окно(js)
 
-Jade + Stulys + БЭМ
 
 ## Старт проекта
 
-git clone https://github.com/merss19/shop_baron.git
+git clone https://github.com/merss19/pop-up.git
 ```
 npm i
 ```
