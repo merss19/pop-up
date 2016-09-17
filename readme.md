@@ -3,7 +3,7 @@
 
 ## Старт проекта
 
-git clone https://github.com/merss19/pop-up.git
+git clone
 ```
 npm i
 ```

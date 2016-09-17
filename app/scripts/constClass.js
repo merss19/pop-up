@@ -1,10 +1,16 @@
 
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
+    /**
+     * ------------------------------------------------------------------------
+     * Constants
+     * ------------------------------------------------------------------------
+     */
 
+    /**
+     * Название css классов
+     * @constant
+     * @type {string}
+     * @default
+     */
 
 const Class = {
     modal: '.rule-modal',
@@ -49,11 +55,25 @@ const Class = {
     actionRuleTrigger:'.action-rule__trigger'
 
 }
+    /**
+     * Имена css классов
+     * @constant
+     * @type {string}
+     * @default
+     */
+
 const ClassName = {
     ruleTableBtn:'rule-table__btn',
     ruleTableEdit:'rule-table__edit',
     inProcess:'inProcess'
 }
+
+    /**
+     * Имена шаблонов
+     * @constant
+     * @type {string}
+     * @default
+     */
 
 const TplName = {
     rule:'rule',
@@ -63,6 +83,13 @@ const TplName = {
     course:'course',
     courseItem:'course-item'
 }
+
+    /**
+     * id шаблонов
+     * @constant
+     * @type {string}
+     * @default
+     */
 
 const Tpl = {
     rule:`#tpl-${TplName.rule}`,
@@ -77,6 +104,13 @@ const Constant = {
     select:'Добавить развивающее действие'
 }
 
+    /**
+     * Data атрибуты
+     * @constant
+     * @type {string}
+     * @default
+     */
+
 const Data = {
     category:'data-category',
     user:'data-user',
@@ -87,6 +121,13 @@ const Data = {
     id:'data-id',
     programId:'data-program_id'
 }
+
+    /**
+     * События
+     * @constant
+     * @type {string}
+     * @default
+     */
 
 const Event = {
     clickSave:'click.save',

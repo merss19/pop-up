@@ -34,12 +34,9 @@ const gr = (($) => {
         // добавляет данные в указанном месте
         tpla: function (tpl, data, tgt) {
             var elements = [];
-         /*   console.log(tpl);
-            console.log(data);
-            console.log(tgt);*/
             for (var k in data) {
                 var s = tpl;
-                console.log(s);
+
                 for (var kk in data[k]) {
                     var id = Math.random();
                     //s = s.replace(/\--id--/g, id);

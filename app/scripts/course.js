@@ -6,10 +6,12 @@ const Course = (($) => {
 
 
     /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
+     * Название класса
+     * @constant
+     * @type {string}
+     * @default
      */
+
 
     const NAME                = 'course'
     const DATA_KEY            = 'course'
@@ -19,6 +21,13 @@ const Course = (($) => {
 
 
     class Course {
+
+        /**
+         * Создание объекта курса
+         * @param {array} course - Список курсов
+         * @param {object} rule - Правило
+         * @private
+         */
 
         constructor(course, rule) {
             this.rule= $(rule)[0]
@@ -33,6 +42,11 @@ const Course = (($) => {
 
 
         // public
+
+        /**
+         * Рендеринг курса
+         * @public
+         */
 
         render(){
             let programName = []
@@ -71,6 +85,13 @@ const Course = (($) => {
 
         }
 
+
+        /**
+         * Редактирование курса
+         * @public
+         */
+
+
         edit() {
             if (this.rule.actionDesc.hasClass(ClassName.inProcess)) {
                 return false;
@@ -98,9 +119,9 @@ const Course = (($) => {
                     //демо данные
 
                     data = actions
+                    let dataLen = data.length
 
-
-                    for (let i = 0; i < data.length; i++) {
+                    for (let i = 0; i < dataLen; i++) {
 
                         this.actionCourse[i] = {
                             id:data[i]['id'],
@@ -113,12 +134,14 @@ const Course = (($) => {
 
                 })
             }
+            let actionCourseLen = this.actionCourse.length
 
-
-            for (let i = 0; i <  this.actionCourse.length; i++) {
+            for (let i = 0; i <  actionCourseLen; i++) {
                 this.actionCourse[i]['checked'] = ''
 
-                for (let k = 0; k <  this.actions.length; k++) {
+                let actionsLen = this.actions.length
+
+                for (let k = 0; k <  actionsLen; k++) {
 
                     if (this.actionCourse[i]['program_id'] == this.actions[k]['program_id']){
 
@@ -145,6 +168,11 @@ const Course = (($) => {
 
         // private
 
+        /**
+         * Показ/скрытие "нет развивающих действий "
+         * @private
+         */
+
         _updateNoAction() {
 
             if (this.table.find('.table-row').length == 0) {
@@ -155,6 +183,12 @@ const Course = (($) => {
                 this.table.show()
             }
         }
+
+        /**
+         * Показ/скрытие "нет выбранных курсов"
+         * @private
+         */
+
 
         _updateNoCourse() {
             let checkedCourses = this.rule.actionDescList.find('input:checked')
@@ -167,6 +201,14 @@ const Course = (($) => {
                 this.actionTableNoCourse.hide();
             }
         }
+
+
+        /**
+         * Показ/скрытие программ в селекте
+         * @param {string} programId - id программы
+         * @param {string} action - 'hide'/'show'
+         * @private
+         */
 
         _updateSelect(programId, action){
             let options = this.rule.selectOption,
@@ -188,7 +230,10 @@ const Course = (($) => {
             }
         }
 
-
+        /**
+         * Удаление курса
+         * @private
+         */
 
         _delete(){
             // данные для аякс запроса
@@ -225,12 +270,18 @@ const Course = (($) => {
         }
 
 
+        /**
+         * Сохранение курса
+         * @private
+         */
+
         _save() {
             let $this = $(this),
                 checkedCourses = this.rule.actionDescList.find('input:checked'),
-                programs = []
+                programs = [],
+                checkedCoursesLen = checkedCourses.length
 
-                for (let i = 0; i < checkedCourses.length; i++) {
+                for (let i = 0; i < checkedCoursesLen; i++) {
                     let programId = $(checkedCourses[i]).attr(Data.programId),
                         id = $(checkedCourses[i]).attr(Data.id),
                          label = $(checkedCourses[i]).next('label');
@@ -250,7 +301,10 @@ const Course = (($) => {
 
         }
 
-
+        /**
+         * Отмена редактирование\сохранения курса
+         * @private
+         */
 
         _cancel(){
             this.rule._hideActionDesc()

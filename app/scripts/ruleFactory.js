@@ -7,8 +7,20 @@ let count = 10
 
 const RuleFactory = (($) => {
 
+    /**
+     * @fileoverview Базовый объект для работы с правилами. Определяет общие
+     * методы для правила.
+     * @author Alexandr Merinov (a.merinov19@gmail.com)
+     */
 
    class RuleFactory {
+
+        /**
+         * Создание объекта правила
+         * @param {string} rule - Правило
+         * @public
+         */
+
 
         constructor () {
             this.$modal = $(Class.modal),
@@ -19,13 +31,19 @@ const RuleFactory = (($) => {
             $(Class.ruleTable).on('click', '.btn-modal', (e) => {
                 this.category = $(e.target).closest('.rule-table__item').attr(Data.category),
                 this.userId = $(e.target).closest('.rule-table').attr(Data.user)
-                this._modal(e.target)
+                this.modal(e.target)
             })
         }
 
-       // private
+       // public
 
-        _modal(btn) {
+        /**
+         * Открытие модального окна
+         * @param {object} btn - Кнопка(триггер) для модального окна
+         * @public
+         */
+
+        modal(btn) {
             // открытие модального окна
             let
                 $this = $(btn),
@@ -34,17 +52,17 @@ const RuleFactory = (($) => {
 
             this.modallist.empty()
 
-            data = {
+           /* data = {
                 category: this.category,
                 userId: this.userId
-            }
+            }*/
 
 
-            this._add(this.addBtn, data)
+            this._add()
 
             this.addBtn.off(Event.clickAddRule);
             this.addBtn.on(Event.clickAddRule, () => {
-                    this._add(this.addBtn, data)
+                    this._add()
                 })
 
             if ($this.hasClass(ClassName.ruleTableEdit)) {
@@ -54,6 +72,14 @@ const RuleFactory = (($) => {
             this.btnSave.on(Event.clickSave, () => this._save($this))
 
         }
+
+        // private
+
+        /**
+         * Сохранение правил
+         * @param {object} btn - Кнопка(триггер)
+         * @private
+         */
 
         _save(btn) {
             //сохранение правил
@@ -77,8 +103,13 @@ const RuleFactory = (($) => {
 
         }
 
-        _add(btn, data) {
-            //добавление нового правила
+        /**
+         * Добавление нового правила
+         * @private
+         */
+
+        _add() {
+
 
             let
                 rule,
@@ -104,8 +135,9 @@ const RuleFactory = (($) => {
                     id_r: count,
                     ipr_setting_id: "ipr_" + count
                 }
+                let selectProgramsLen = data.selectPrograms.length
 
-                for (let i = 0; i < data.selectPrograms.length; i++) {
+                for (let i = 0; i < selectProgramsLen; i++) {
 
                     $ruleSelect[i] = {
                         id: data.selectPrograms[i]['id'],
@@ -139,8 +171,13 @@ const RuleFactory = (($) => {
 
         }
 
+        /**
+         * Редактирование уже существующих правил
+         * @private
+         */
+
+
         _edit() {
-            // редактирование уже существующих правил
             let
                 $ruleObj = {},
                 $ruleSelect = {},
@@ -181,7 +218,9 @@ const RuleFactory = (($) => {
                         programs: data.rules[k]['programs']
                     }
 
-                    for (let i = 0; i < data.rules[k].selectPrograms.length; i++) {
+                    let selectProgramsLen = data.rules[k].selectPrograms.length
+
+                    for (let i = 0; i < selectProgramsLen; i++) {
                         $ruleSelect[i] = {
                             id: data.rules[k].selectPrograms[i]['id'],
                             program: data.rules[k].selectPrograms[i]['program'],
@@ -194,8 +233,9 @@ const RuleFactory = (($) => {
                 rule = gr.tpl($(Tpl.rule).html(), $ruleObj, this.modallist)
                 gr.tpla($(Tpl.ruleSelect).html(), $ruleSelect, $(Class.selectList))
 
+                let ruleLen = rule.length
 
-                for (let i = 0; i < rule.length; i++) {
+                for (let i = 0; i < ruleLen; i++) {
                     $(rule[i]).rule({
                         method: 'render',
                         data: $ruleObj[i]

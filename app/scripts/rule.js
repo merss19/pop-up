@@ -7,9 +7,10 @@ const Rule = (($) => {
 
 
     /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
+     * Название класса
+     * @constant
+     * @type {string}
+     * @default
      */
     const NAME                = 'rule'
     const DATA_KEY            = 'rule'
@@ -18,6 +19,12 @@ const Rule = (($) => {
 
 
     class Rule {
+
+        /**
+         * Создание объекта правила
+         * @param {string} rule - Правило
+         * @private
+         */
 
         constructor(rule) {
             this.ruleObj = $(rule)
@@ -85,6 +92,13 @@ const Rule = (($) => {
 
         // public
 
+        /**
+         * Рендеринг правила
+         * @param {object} data - Данные для рендеринга
+         * @public
+         */
+
+
         render(data){
 
             if(data){
@@ -94,7 +108,7 @@ const Rule = (($) => {
             }
 
             //рендеринг баллов
-            console.log(this.actionTable)
+
 
             //рендеринг программ
             this.actionTable.empty()
@@ -115,11 +129,21 @@ const Rule = (($) => {
 
         // private
 
+        /**
+         * Закрытие поповера
+         * @private
+         */
+
         _hideActionDesc(){
 
             this.actionDesc.hide();
             $(document.body).off(Event.clickHideActionDesc);
         }
+
+        /**
+         * Открытие поповера
+         * @private
+         */
 
         _showActionDesc(){
 
@@ -127,6 +151,11 @@ const Rule = (($) => {
             this.actionDesc.trigger($.Event(Event.actionDescShown))
 
         }
+
+        /**
+         * Удаление правила
+         * @private
+         */
 
         _delete(){
 
@@ -153,6 +182,12 @@ const Rule = (($) => {
             });
         }
 
+
+        /**
+         * Показ/скрытие "нет правил"
+         * @private
+         */
+
         _updateNoRule() {
             if (this.modalList.find(Class.actionRule).length == 0){
                 this.noRule.show();
@@ -161,6 +196,10 @@ const Rule = (($) => {
             }
         }
 
+        /**
+         * Выбор селекта
+         * @private
+         */
 
         _select() {
             let input = this.selectInput,
@@ -203,6 +242,12 @@ const Rule = (($) => {
             })
         }
 
+        /**
+         * Добавление курса
+         * @private
+         */
+
+
         _addCourse(){
             let
                 ipr = this.ruleObj.attr(Data.iprId),
@@ -225,6 +270,11 @@ const Rule = (($) => {
         }
 
         // static
+        /**
+         * Инициализация объекта класса
+         * @param {object} config - данные для инициализации
+         * @static
+         */
         static _init(config) {
             return this.each(function () {
 
